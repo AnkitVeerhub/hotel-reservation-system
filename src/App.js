@@ -4,29 +4,66 @@ import RoomGrid from "./components/RoomGrid";
 import Controls from "./components/Controls";
 import "./App.css";
 
-const App = () => {
-  const initialRooms = Array.from({ length: 97 }, (_, i) => ({
-    id: i + 1,
-    isBooked: false,
-  }));
+const generateRooms = () => {
+  let rooms = [];
+  for (let floor = 1; floor <= 10; floor++) {
+    let roomCount = floor === 10 ? 7 : 10; // Floor 10 has only 7 rooms
+    for (let i = 1; i <= roomCount; i++) {
+      const roomNumber = floor * 100 + i; // Correct room numbering
+      rooms.push({
+        id: roomNumber,
+        floor,
+        isBooked: false,
+      });
+    }
+  }
+  return rooms;
+};
 
-  const [rooms, setRooms] = useState(initialRooms);
+const App = () => {
+  const [rooms, setRooms] = useState(generateRooms());
 
   const handleBook = (numRooms) => {
-    const availableRooms = rooms.filter((room) => !room.isBooked);
-    if (availableRooms.length < numRooms) {
+    const availableRoomsByFloor = {};
+
+    // Organize available rooms floor-wise
+    for (let floor = 1; floor <= 10; floor++) {
+      availableRoomsByFloor[floor] = rooms.filter(
+        (room) => room.floor === floor && !room.isBooked
+      );
+    }
+
+    let selectedRooms = [];
+
+    // 1️⃣ First, try booking all rooms on the same floor
+    for (let floor = 1; floor <= 10; floor++) {
+      if (availableRoomsByFloor[floor].length >= numRooms) {
+        selectedRooms = availableRoomsByFloor[floor].slice(0, numRooms);
+        break;
+      }
+    }
+
+    // 2️⃣ If same-floor booking is not possible, book across multiple floors
+    if (selectedRooms.length < numRooms) {
+      selectedRooms = [];
+      for (let floor = 1; floor <= 10 && selectedRooms.length < numRooms; floor++) {
+        let remaining = numRooms - selectedRooms.length;
+        selectedRooms.push(...availableRoomsByFloor[floor].slice(0, remaining));
+      }
+    }
+
+    if (selectedRooms.length < numRooms) {
       alert("Not enough rooms available!");
       return;
     }
 
-    const updatedRooms = [...rooms];
-    let count = 0;
-    for (let room of updatedRooms) {
-      if (!room.isBooked && count < numRooms) {
-        room.isBooked = true;
-        count++;
-      }
-    }
+    // Update room status
+    const updatedRooms = rooms.map((room) =>
+      selectedRooms.some((selected) => selected.id === room.id)
+        ? { ...room, isBooked: true }
+        : room
+    );
+
     setRooms(updatedRooms);
   };
 
@@ -39,11 +76,7 @@ const App = () => {
   };
 
   const handleReset = () => {
-    const updatedRooms = rooms.map((room) => ({
-      ...room,
-      isBooked: false,
-    }));
-    setRooms(updatedRooms);
+    setRooms(generateRooms());
   };
 
   return (
