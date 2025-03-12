@@ -1,38 +1,159 @@
+/* General Styling */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  height: 100%;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  padding: 20px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+/* Header Styling */
+.App-header {
+  background: linear-gradient(135deg, #4a90e2, #1456a2);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Layout Container */
+.layout-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 100vh; /* Adjust height */
+  padding-bottom: 50px;
+}
+
+/* Room Grid */
+.room-grid {
+  flex-grow: 1;
+  max-width: 600px;
+  background: white;
+  border-radius: 8px;
+  height: 100%; /* Make it take full height */
+  padding-bottom: 30px;
+}
+
+/* Building Viewer */
+.building-container {
+  width: 250px;
+  height: 100vh; /* Ensure full height */
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: flex-start;
+  background: white;
+  border-right: 2px solid #ddd;
+}
+
+/* SVG Image */
+.building-container img,
+.building-container svg {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  object-fit: cover; /* Ensures full display */
+  display: block;
+}
+
+/* Room Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+  max-width: 600px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  height: 100%;
+}
+
+/* Room Styling */
+.room {
+  padding: 15px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.available {
+  background-color: #dff0d8;
+  color: #2c662d;
+}
+
+.booked {
+  background-color: #e57373;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  }
+
+  form {
+    width: 90%;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  /* Adjust layout on small screens */
+  .layout-container {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .building-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .building-container svg {
+    height: auto;
+  }
+
+  .room-grid {
+    max-width: 100%;
+    height: auto;
   }
 }

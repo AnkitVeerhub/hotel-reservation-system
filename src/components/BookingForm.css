@@ -1,0 +1,132 @@
+/* Center the Card */
+.booking-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  max-width: 370px;
+  text-align: center;
+  margin: 50px auto;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Card Hover Effect */
+.booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Title */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+/* Subtitle */
+.subtitle {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+/* Booking Form */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #ecf0f1;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Input Field */
+input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  flex-grow: 1;
+  padding: 5px;
+}
+
+/* Input Wrapper Hover Effect */
+.input-wrapper:hover {
+  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Input Icon */
+.icon {
+  margin-right: 10px;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+/* Error Text */
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: -8px;
+}
+
+/* Error Border */
+.error-border {
+  border: 2px solid red;
+}
+
+/* Book Button */
+.book-button {
+  background: linear-gradient(45deg, #e67e22, #d35400);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Button Hover Effect */
+.book-button:hover {
+  transform: scale(1.07);
+  box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Button Icon */
+.button-icon {
+  font-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .booking-card {
+      max-width: 320px;
+  }
+
+  .input-wrapper {
+      width: 100%;
+  }
+
+  .book-button {
+      width: 100%;
+  }
+}

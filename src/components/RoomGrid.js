@@ -1,5 +1,7 @@
 import React from "react";
 import "./RoomGrid.css";
+import roomImage from "../assets/room.png";
+import { FaBed, FaLayerGroup, FaStairs } from "react-icons/fa"; // Importing icons
 
 const RoomGrid = ({ rooms }) => {
   const floors = {};
@@ -16,15 +18,24 @@ const RoomGrid = ({ rooms }) => {
         .sort((a, b) => b - a) // Show top floors first
         .map((floor) => (
           <div key={floor} className="floor">
-            <h3>Floor {floor}</h3>
+            <h3 className="floor-title">🏢 Floor {floor}</h3>
             <div className="grid">
+              {/* Lift and stairs section on the left */}
+              <div className="lift-stairs">
+                <FaLayerGroup className="lift-icon" title="Elevator" />
+                <FaLayerGroup className="stairs-icon" title="Stairs" />
+              </div>
+
+              {/* Rooms arranged sequentially from left to right */}
               {floors[floor].map((room) => (
-                <div
-                  key={room.id}
-                  className={`room ${room.isBooked ? "booked" : "available"}`}
-                  title={`Room ${room.id}`}
-                >
-                  {room.id}
+                <div key={room.id} className="room-container">
+                  <img
+                    src={roomImage}
+                    alt={`Room ${room.id}`}
+                    className="room-image"
+                  />
+                  <span className="room-number">{room.id}</span>
+                  {room.isBooked && <div className="overlay">Booked</div>}
                 </div>
               ))}
             </div>
